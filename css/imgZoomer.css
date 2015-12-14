@@ -1,0 +1,20 @@
+p {
+	margin: 0;
+}
+.wrapper {
+	background: #eee;
+	width:950px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.imgContainer {
+	width: 348px;
+	height: 348px;
+	border: 1px solid #888;
+	overflow: hidden;
+	float: left;
+}
+.content {
+	float: right;
+	width:570px;
+}

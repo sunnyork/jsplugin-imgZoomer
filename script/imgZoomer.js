@@ -1,3 +1,10 @@
+/**
+ *  js plugin based on jQuery 1.6.2
+ *  @author: Davis Lin
+ *  @version: 1.0
+ *  @date: Jul.2014
+ *  @param opt_module_id {ins} ID of DOM which contains the thumbnail. 
+*/
 function imgZoomer(opt_module_id){
     var mod = $('#'+opt_module_id), //模組容器 (=blk的容器)
         img = $('.cover',mod), //小圖
