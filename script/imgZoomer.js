@@ -5,9 +5,10 @@
  *  @date: Jul.2014
  *  @param opt_module_id {ins} ID of DOM which contains the thumbnail. 
 */
-function imgZoomer(opt_module_id){
-    var mod = $('#'+opt_module_id), //模組容器 (=blk的容器)
-        img = $('.cover',mod), //小圖
+function ImgZoomer(thumbnail_container){
+    var obj = this, 
+        mod = $('#'+thumbnail_container), //模組容器 (=blk的容器)
+        img = $('.thumbnail',mod), //小圖
         mdw = $(mod).width(), //mod容器尺寸
         mdh = $(mod).height(),
         ie = $.browser.msie,
@@ -15,8 +16,8 @@ function imgZoomer(opt_module_id){
         ie8 = ie && (iev>=8),
         body = $('body')[0],
         min_size = 700, //啟動效果的最低尺寸
-        img_waiting = '#fff url("http://db.books.com.tw/G/shopping_car_2007/images/waiting.gif") 50% 50% no-repeat',
-        img_blk = 'url(/csss/images/img_drag_bg.gif)',
+        img_waiting = '#fff url("image/waiting.gif") 50% 50% no-repeat',
+        img_blk = 'url(image/img_drag_bg.gif)',
         blkCSS = {
             background: img_blk,
             position: 'absolute',
@@ -35,9 +36,8 @@ function imgZoomer(opt_module_id){
             visibility:'hidden',
             top:'-9999px',
             display:'none'
-        },
-        obj = this; 
-    obj.main = function(){
+        };
+    obj.init = function(){
         $(mod).bind({
             'mouseenter':function(e){obj.open(e)},
             'mouseleave':function(){obj.close()}
@@ -55,7 +55,7 @@ function imgZoomer(opt_module_id){
     };
     obj.setDOM = function(e){
         //var pos = $('.prd001').offset(); //品名容器位置(H2)
-        var pos = $('h1:eq(0)').offset(); //品名容器位置(H1)
+        var pos = $('#content').offset(); //品名容器位置(H1)
         var blk = $('<div id="img_drag_blk"></div>');
         var pre = $('<div id="img_drag_pre"><img title="loading"></div>'); //預覽框
         $(pre).appendTo(body).css({
@@ -67,13 +67,15 @@ function imgZoomer(opt_module_id){
         return obj;
     };
     obj.setImg = function(s,e){
-//        var psrc = s.substring(0,s.indexOf('&v=')).replace(/^http.*i=/,''); //原始圖路徑
-//        var verno = s.substr(s.indexOf('&v=')+3,8); //取得版號
-        var patt = /https?:\/\/.*\?i=([\w\d\/\.:]+)&v=([\d\w]+)&.*/i;
-        var result_arr = patt.exec(s);  //取得 pattern 後的結果
-        var psrc_org = result_arr[1];   //原始圖路徑
-        var verno = result_arr[2];  //取得版號
-        var psrc = 'http://im1.book.com.tw/image/getImage?i='+psrc_org+'?v='+verno; //取得帶縮圖程式的原圖
+        // Hide the pattern part as this is for demonstration only.
+        // var patt = /https?:\/\/.*\?i=([\w\d\/\.:]+)&v=([\d\w]+)&.*/i;
+        // var result_arr = patt.exec(s);  //取得 pattern 後的結果
+        // var psrc_org = result_arr[1];   //原始圖路徑
+        // var verno = result_arr[2];  //取得版號
+        // var psrc = 'http://im1.book.com.tw/image/getImage?i='+psrc_org+'?v='+verno; //取得帶縮圖程式的原圖
+        var psrc_org = 'http://www.books.com.tw/img/001/067/30/0010673084.jpg', // Hard-coded for demo
+            psrc = 'http://im1.book.com.tw/image/getImage?i=' + psrc_org;
+            console.log(psrc);
         if(!ie || ie8){
             var img1 = $('<img id="img_drag_tempimg">');
             $(img1).load(function(){
@@ -82,7 +84,8 @@ function imgZoomer(opt_module_id){
                     ih = $(img1).height(),
                     is = (iw>=ih)?iw:ih;
                 if(is>=min_size){
-                    var nsrc = 'http://im2.book.com.tw/image/getImage?i='+psrc_org+'&v='+verno+'&w='+is+'&h='+is,
+                    // var nsrc = 'http://im2.book.com.tw/image/getImage?i='+psrc_org+'&v='+verno+'&w='+is+'&h='+is,
+                    var nsrc = 'http://im2.book.com.tw/image/getImage?i=' + psrc_org + '&w=' + is + '&h=' + is,
                         pre = $('#img_drag_pre');
                     $(pre).css('visibility','visible');
                     var img2 = $('<img>');
@@ -132,5 +135,4 @@ function imgZoomer(opt_module_id){
             obj.setPos(e);
         });            
     };
-    obj.main();
 }

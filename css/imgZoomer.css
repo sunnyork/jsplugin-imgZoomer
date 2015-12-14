@@ -1,20 +1,35 @@
+/* globa */
 p {
 	margin: 0;
 }
+/* container */
 .wrapper {
 	background: #eee;
 	width:950px;
 	margin: 0 auto;
 	overflow: hidden;
+	min-height: 350px;
+	border-spacing: 30px;
+}
+.wrapper > div {
+	display: table-cell;
 }
 .imgContainer {
+	vertical-align: middle;
+	text-align: center;
 	width: 348px;
 	height: 348px;
 	border: 1px solid #888;
 	overflow: hidden;
-	float: left;
+	background: #fff;
+	position: relative;
 }
 .content {
-	float: right;
 	width:570px;
+}
+/* images */
+.imgContainer img {
+	max-width: 348px;
+	max-height: 348px;
+	margin: auto;
 }

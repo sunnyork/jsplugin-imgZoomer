@@ -7,10 +7,10 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="imgContainer">
-			<img src="image/cover_thumbnail.jpg" alt="thumbnail">
+		<div class="imgContainer" id="imgContainer">
+			<img src="image/cover_thumbnail.jpg" alt="thumbnail" class="thumbnail">
 		</div>
-		<div class="content">
+		<div class="content" id="content">
 			<p>
 				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 			</p>
@@ -23,9 +23,9 @@ $(function() {
     // var opt_module_id = "M201106_0_getTakelook_P00a400020052";
     // var M201106_0_getTakelook_P00a400020052 = new Overlay(opt_module_id);
     // var M201106_0_getTakelook_P00a400020052zommer = new img_zoomer(opt_module_id);
-    
-    // var opt_module_id = 'test';
-    // var test = new imgZoomer();
+     
+    var imgZoomer = new ImgZoomer('imgContainer');
+    imgZoomer.init();
 });
 </script>
 </body>
